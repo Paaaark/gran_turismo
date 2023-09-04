@@ -1,0 +1,17 @@
+.rounded_rectangle {
+  margin-left: auto;
+  margin-right: 0;
+  height: 10%;
+  width: 50%;
+  background-color: #959597;
+  border-radius: 10px;
+}
+
+.card_flag {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.card_bottom {
+    background-color: #1b1b1c;
+}

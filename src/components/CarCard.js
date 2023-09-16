@@ -8,8 +8,7 @@ import Divider from '@mui/material/Divider';
 import styles from './comp_styles.css';
 
 const CarCard = ( car ) => {
-    console.log(car.car.name);
-    console.log(car);
+    console.log("My car is: ", car)
     return (
         <Card sx={{ width: "100%" }} style={{backgroundColor: '#141416'}}>
             <CardContent>

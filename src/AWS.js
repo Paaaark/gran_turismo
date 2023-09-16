@@ -5,9 +5,9 @@ export function getClient() {
     const client = new DynamoDBClient({
         region: 'us-east-1',
         credentials: {
-            accessKeyId: "ASIAZBMDPLH2MBAPN2YL",
-            secretAccessKey: "lbt/i5Xar89SXnG7MfgoB1wvRegMxWefZisIZU29",
-            sessionToken: "IQoJb3JpZ2luX2VjEIv//////////wEaCXVzLWVhc3QtMSJHMEUCIGhun1CdsutcmaQ89Zb4vLxEHNaDZOA/dFZva0UKXQItAiEA+r0t+K9C79y4weloyec6Ko0p6Rd31qpyPSi+0UClkOcq6wIIdBAAGgw2MjE0MzUzNzgxNjQiDNEH+tYHWbiiEvRH7SrIAuRz/nHfuHhOp3RnApOVM0Otkmk1qRRJtRnVTTiTKFFbQ/HORp/alPuaEfxfz3hmVEVzfM2ITXmNZ45jh2WRq3mfXuxnmCSmGnh0MVVMcif9C4ZiH02K+qm3xTQEv/xFALhLIZzPrdTMpig4daA1N7GY+h7F8xQvnUa96po0V+ytzTgJseRxOyjwGaNrhZjP+BQX0CNpXVsR7UZUe1L3rbUo61pL4qjYeCA2SxhvFFibjAAFXlfYoKI++5aZXANlS6mhobdTrjMdJ0TrgA33u3f2ZHc4pNX1DvBqlbtHZONzZ/KnLirX42yKAVt1oFGDLuAhezRMxyqk3qK70khgWaDrLHh3wxDNnAQwMtQ7KpXM+mXjEjUM/FEeR0GhaKFsPqPLKkZKFzihfAkOUz742pgxPthflZ8dF7mbfVUvJ0jEgrhUlsPWmAUwxYeWqAY6pwEbyocno8xSqC0HbINsI8LaxSVFgmJTVYE0y7yQ+W/Ky9op5NqnlWFiwZaOzl7bXBE1+H91Jd7yVfw9ZSiZWhQepKQ8TcVNPpbyiRwQnAI3I2W6RnExvM2fUTmthoFd8k0653U39P4Z0/Do1pqrSIKqNxHOgvJGuHVXHqHNuJfIwj5c+/C3AjRX7aZ1cA4K75U3GzRvvp0zoAzPG7hmpj4vxn9H3/E//A=="
+            accessKeyId: "ASIAZBMDPLH2FKPAVAV7",
+            secretAccessKey: "1r5FMM2h0PqtKwvt9L9YLzztDqEERLi0pPJCM3be",
+            sessionToken: "IQoJb3JpZ2luX2VjEI3//////////wEaCXVzLWVhc3QtMSJGMEQCIDUBGm5qOuTogpo3qgLNqGPATDCoIxntjJ3O6BPPbZ2JAiBlWurHZBUKZ2/G5XKAj8yuzSlQ1DqmR2MWOkmGLNyn9CrrAgh2EAAaDDYyMTQzNTM3ODE2NCIM8qW4Y4ZKGoMJ8HwCKsgCZAEPWaJm/JGczi2eHxJ7EcDZYXSMErAD+ZISpCwRrfIo0WpcnuZjVEGiCnYfxclrBSPib73CNT1lCPcwVLCYKXh1qf+XS25fg2/dDOKX85SFm1XO96RAknKYms7ZODjsfMWCwrD2wPnsIcsX2htSrDxXJHKugDDWkbxFd2y3joxHJBxKIvotcuZ5eGH1UuCnklN5bAwbFOFPDLWV9Clne+G2xPko0qfzjWhIuFSwfa6kza/ejoRgoorTWlB3R+evZtciRnbClX0jUQosU98qFjF69rSE3F9AIIbYUd/7WuwKE0t9ItlRMFhhNSao5NGxaVa4vMMvTWIoHu18PaC6ZZLo6Y7y+Ypqxxvn1oYm4c4BRsIvDx3zA0f6d4lhftseYW4XhI9FtI79ZyRxppuvTnAyWTAz2SF7UupPa0Rmo5iKLdi2KjdYUTDEzpaoBjqoATpNtOECEk+OLYCxRIJyzH9nR7nn8Rf7y/gFE+Sw7qKEKapsAP4ILp2dwDLo9Kr06SEnDbxrR4BfAHi0JeddNrRhtpPC6Zfk/OZvi/YnugS30PdXZuON9Ekb8pDt5kkwsP2J7iiHqRjbMZLWU61hTuHlZBXjHlEl9ywhDZDM2hNMxDz9SU2kJzaEkvr7/KBo8y7J7zKscatIULRqXZoujAUMDXP7knI/Bg=="
         }
 });
     return client;

@@ -24,7 +24,15 @@ export async function fetchData(client, limit, setData) {
     const items = response["Items"];
     const result = [];
     for (let i = 0; i < limit; i++) {
-        result.push(items[i.toString()]);
+        let item = items[i.toString()];
+        let newItem = {};
+        Object.keys(item).forEach((key) => (
+            newItem[key] = item[key]['S']
+        ));
+        newItem['img_path'] = newItem['img_path'].substring(0, 11) + 
+                              newItem['img_path'].substring(16);
+        console.log("img_path: ", newItem['img_path']);
+        result.push(newItem);
     }
     return result;
 }

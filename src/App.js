@@ -16,7 +16,7 @@ export default function App() {
 
   async function startData() {
     const myClient = getClient();
-    const temp = await fetchData(myClient, "5");
+    const temp = await fetchData(myClient, "50");
     setCars(temp);
   }
 

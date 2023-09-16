@@ -7,11 +7,11 @@ const MainFragment = ({ cars }) => {
     console.log(typeof(cars));
     return (
         <Grid container>
-            {cars != null ? cars.map((car) => {
+            {cars != null ? cars.map((car) => (
                 <Grid item>
                     <CarCard car={car} />
                 </Grid>
-            }) : null}
+            )) : (<div />)}
         </Grid>
     )
 }

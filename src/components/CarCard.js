@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -7,8 +8,9 @@ import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import styles from './comp_styles.css';
 
-const CarCard = ( car ) => {
-    console.log("My car is: ", car)
+const CarCard = ( param ) => {
+    const [car, setCar] = useState(param.car);
+    console.log("My car is: ", car.name)
     return (
         <Card sx={{ width: "100%" }} style={{backgroundColor: '#141416'}}>
             <CardContent>
@@ -18,20 +20,20 @@ const CarCard = ( car ) => {
                     </Grid>
                     <Grid item xs>
                         <div className="rounded_rectangle">
-                            <Typography style={{fondWeight: 100}} align='center'>PP {car.car.pp}</Typography>
+                            <Typography style={{fondWeight: 100}} align='center'>PP {car.pp}</Typography>
                         </div>
                     </Grid>
                 </Grid>
             </CardContent>
-            <CardMedia component="img" image="https://i.ibb.co/L84PtR4/Alfa-Romeo-4-C-Gr4.jpg" 
-            height="140" alt={car.car.name}/>
+            <CardMedia component="img" image={"https://kudosprime.com/gt7/" + car.img_path}
+            height="140" alt={car.name}/>
             <CardContent>
                 <Typography align='center' variant="h6" color='common.white' component="div">
-                    {car.car.name}
+                    {car.name}
                 </Typography>
                 <Typography align='center' component="div" color='#787878'>
-                    {car.car.car_layout + ' / ' + car.car.power + ' HP / ' + car.car.weight + 
-                    ' lb / ' + car.car.aspiration}
+                    {car.cty + ' / ' + car.pw + ' HP / ' + car.weight + 
+                    ' lb / ' + car.aspi}
                 </Typography>
                 <Divider variant="fullWidth" style={{background: '#65656b'}}/>
                 <div className='card_bottom'>

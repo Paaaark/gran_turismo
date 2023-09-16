@@ -22,7 +22,7 @@ export async function fetchData(client, limit) {
 
     const command = new ScanCommand(input);
     const response = await client.send(command);
-    console.log(response);
+    console.log(responsep["Items"]);
     return response;
 }
 // const client = new DynamoDBClient

@@ -11,7 +11,6 @@ import { createTheme } from '@mui/material/styles';
 
 const CarCard = ( param ) => {
     const [car, setCar] = useState(param.car);
-    console.log("My car is: ", car.name);
 
     return (
         <Card sx={{ width: "100%", height: "100%" }} style={{backgroundColor: '#141416'}}>

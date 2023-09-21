@@ -1,7 +1,6 @@
 import React from 'react';
 import CarCard from './CarCard';
 import Grid from '@mui/material/Grid';
-import { useState, useEffect } from 'react';
 
 const MainFragment = ({ cars }) => {
 

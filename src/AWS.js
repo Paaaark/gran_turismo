@@ -13,7 +13,7 @@ export async function getClient() {
     return client;
 }
 
-export async function fetchData(client, limit, setData) {
+export async function fetchData(client, limit) {
     console.log("My client: ", client)
     const input = {
         TableName: "gt_car_list",
@@ -34,5 +34,28 @@ export async function fetchData(client, limit, setData) {
                               newItem['img_path'].substring(16);
         result.push(newItem);
     }
+    return result;
+}
+
+export async function fetchFilter(client) {
+    const input = {
+        TableName: "gt_car_filters",
+    };
+
+    const command = new ScanCommand(input);
+    const response = await client.send(command);
+    const items = response["Items"];
+    console.log("Filter fetched: ", items);
+    const result = [];
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i.toString()];
+        let newItem = {
+            property: item['property']['S'],
+            // #TODO: Figure out what is wrong
+            count: item['count']['M']['M']['M']
+        };
+        result.push(newItem);
+    }
+    console.log("Filter fixed: ", result)
     return result;
 }

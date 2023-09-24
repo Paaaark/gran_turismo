@@ -40,13 +40,10 @@ export default function App() {
   }, [searchWord]);
 
   useEffect(() => {
-    console.log("App.js ", page);
-    const start = (page - 1) * perPage;
-    console.log(cars);
     if (cars != null) {
-      setFilteredCars(cars.slice(start, start + perPage))
+      setFilteredCars(sliceData(cars));
     }
-  }, [page, perPage]);
+  }, [page, perPage, cars]);
 
   async function startData() {
     const myClient = await getClient();
@@ -61,13 +58,22 @@ export default function App() {
     setSearchWord(newWord);
   }
 
+  const sliceData = (data) => {
+    if (data != null) {
+      const start = (page - 1) * perPage;
+      return data.slice(start, start + perPage);
+    }
+    return null;
+  }
+
   const toggleDrawer = () => {
     setDrawerState(!drawerState);
   }
 
   return (
     <ThemeProvider theme={myTheme}>
-      <TopPage setPage={setPage} setPerPage={setPerPage} theme={myTheme}/>
+      <TopPage setPage={setPage} setPerPage={setPerPage} theme={myTheme} 
+        total={cars != null ? cars.length : 100}/>
       {/* <TopAppBar searchCar={searchCar}></TopAppBar> */}
       <Chip sx={{margin: '5px 0px 5px 5px'}} color="secondary" label="Filters" onClick={toggleDrawer}/>
       <Drawer open={drawerState} onClose={toggleDrawer}>

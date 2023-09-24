@@ -5,18 +5,39 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import FormGroup from '@mui/material/FormGroup';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
-const DrawerList = ({}) => {
+const DrawerList = ({filters}) => {
+    console.log("Received filter: ", filters);
+    console.log("Updated 2");
     return (
         <Box sx={{width: 250}} role="presentation">
             <List>
-                {['Car Source', 'Make', "etc"].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                {filters != null ? filters.map((filter) => (
+                    <div key={filter.property}>
+                        <ListItem key={"title"} disablePadding>
+                            <ListItemButton>
+                                <ListItemText primary={filter.property} />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem key={"count"}>
+                                {
+                                    Object.keys(filter.count).map((key) => (
+                                        <FormControlLabel 
+                                        key={key}
+                                        control={<Checkbox />}
+                                        label={key} />
+                                    ))
+                                }
+                        </ListItem>
+                    </div>
+                )) : 
+                    (<ListItem key={"not_loaded"} disablePadding>
+                        <ListItemText primary={"Filters are not loaded yet"} />
+                    </ListItem>)
+                }
             </List>
         </Box>
     )

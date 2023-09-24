@@ -27,10 +27,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    setFilters(findSubtotals(cars));
-  }, [cars]);
-
-  useEffect(() => {
     if (filteredCars != null) {
       setFilteredCars(
         cars.filter((car) => car.name.toLowerCase().includes(searchWord.toLowerCase()))
@@ -44,6 +40,7 @@ export default function App() {
     const temp_filter = await fetchFilter(myClient);
     setCars(temp_car);
     setFilteredCars(temp_car);
+    setFilters(temp_filter);
   }
 
   const searchCar = (newWord) => {
@@ -59,7 +56,7 @@ export default function App() {
       <TopAppBar searchCar={searchCar}></TopAppBar>
       <Chip color="secondary" label="Filters" className="chip" onClick={toggleDrawer}/>
       <Drawer open={drawerState} onClose={toggleDrawer}>
-        <DrawerList />
+        <DrawerList filters={filters} />
       </Drawer>
       <Grid>
         <MainFragment cars={filteredCars} searchWord={searchWord}/>

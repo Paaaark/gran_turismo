@@ -14,7 +14,6 @@ export async function getClient() {
 }
 
 export async function fetchData(client, limit) {
-    console.log("My client: ", client)
     const input = {
         TableName: "gt_car_list",
         Limit: Number(limit),
@@ -45,7 +44,6 @@ export async function fetchFilter(client) {
     const command = new ScanCommand(input);
     const response = await client.send(command);
     const items = response["Items"];
-    console.log("Filter fetched: ", items);
     const result = [];
     for (let i = 0; i < items.length; i++) {
         let item = items[i.toString()];
@@ -56,6 +54,5 @@ export async function fetchFilter(client) {
         };
         result.push(newItem);
     }
-    console.log("Filter fixed: ", result)
     return result;
 }

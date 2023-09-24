@@ -2,10 +2,12 @@ import * as React from 'react';
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
-const TopPage = ({setPage}) => {
+const TopPage = ({setPage, theme}) => {
     const [state, setState] = useState(1);
+    console.log("Version 4");
+
     const handleChange = (event, value) => {
         setPage(value);
         setState(value);
@@ -13,7 +15,11 @@ const TopPage = ({setPage}) => {
     };
 
     return (
-        <Pagination count={10} page={state} onChange={handleChange} color="secondary"/>
+        <Box sx={{display: 'flex', justifyContent: 'center'}}>
+            <Pagination count={10} page={state} onChange={handleChange}
+            sx={{flex: 'initial', margin: '0px', button:{color: '#ffffff'}}} color='primary'
+            hidePrevButton hideNextButton/>
+        </Box>
     );
 }
 

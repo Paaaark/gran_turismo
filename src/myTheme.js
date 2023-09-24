@@ -12,7 +12,10 @@ let myTheme = createTheme({
             main: '#FFFFFF',
         },
         black: {
-            main: '#000000',
+            main: '#FF0000',
+        },
+        gray: {
+            main: '#BBBBBB',
         }
     }
 });

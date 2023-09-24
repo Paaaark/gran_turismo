@@ -10,7 +10,7 @@ import Drawer from '@mui/material/Drawer';
 import { getClient, fetchData, fetchFilter } from './AWS';
 import myTheme from "./myTheme";
 import {findSubtotals} from './backend';
-import styles from './styles.css';
+import './styles.css';
 
 // Import custom components
 import TopAppBar from './components/TopAppBar';
@@ -49,7 +49,7 @@ export default function App() {
 
   async function startData() {
     const myClient = await getClient();
-    const temp_car = await fetchData(myClient, "5");
+    const temp_car = await fetchData(myClient, "100");
     const temp_filter = await fetchFilter(myClient);
     setCars(temp_car);
     setFilteredCars(temp_car);
@@ -66,7 +66,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={myTheme}>
-      <TopPage setPage={setPage}/>
+      <TopPage setPage={setPage} theme={myTheme}/>
       {/* <TopAppBar searchCar={searchCar}></TopAppBar> */}
       <Chip sx={{margin: '5px 0px 5px 5px'}} color="secondary" label="Filters" onClick={toggleDrawer}/>
       <Drawer open={drawerState} onClose={toggleDrawer}>

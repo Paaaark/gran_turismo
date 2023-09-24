@@ -17,6 +17,7 @@ html {
   text-align: center;
 }
 
-.chip {
-  margin: 5px;
+.Chip {
+  margin: 15px;
+  padding: 15px;
 }

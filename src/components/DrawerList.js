@@ -23,14 +23,16 @@ const DrawerList = ({filters}) => {
                             </ListItemButton>
                         </ListItem>
                         <ListItem key={"count"}>
+                            <FormGroup>
                                 {
                                     Object.keys(filter.count).map((key) => (
                                         <FormControlLabel 
                                         key={key}
                                         control={<Checkbox />}
-                                        label={key} />
+                                        label={key + " (" + filter.count[key]['N'] + ")"} />
                                     ))
                                 }
+                            </FormGroup>
                         </ListItem>
                     </div>
                 )) : 

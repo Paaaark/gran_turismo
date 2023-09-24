@@ -1,5 +1,6 @@
 import "./styles.css";
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 // Import mui components
 import { ThemeProvider } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
@@ -15,6 +16,7 @@ import styles from './styles.css';
 import TopAppBar from './components/TopAppBar';
 import MainFragment from './components/MainFragment';
 import DrawerList from './components/DrawerList';
+import TopPage from './components/TopPage';
 
 export default function App() {
   const [cars, setCars] = useState(null);
@@ -22,6 +24,8 @@ export default function App() {
   const [filteredCars, setFilteredCars] = useState(null);
   const [drawerState, setDrawerState] = useState(false);
   const [filters, setFilters] = useState(null);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     startData();
   }, []);
@@ -32,7 +36,16 @@ export default function App() {
         cars.filter((car) => car.name.toLowerCase().includes(searchWord.toLowerCase()))
       )
     }
-  }, [searchWord])
+  }, [searchWord]);
+
+  useEffect(() => {
+    console.log("App.js ", page);
+    const start = (page - 1) * 10;
+    console.log(cars);
+    if (cars != null) {
+      setFilteredCars(cars.slice(start, start + 10))
+    }
+  }, [page]);
 
   async function startData() {
     const myClient = await getClient();
@@ -53,8 +66,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={myTheme}>
-      <TopAppBar searchCar={searchCar}></TopAppBar>
-      <Chip color="secondary" label="Filters" className="chip" onClick={toggleDrawer}/>
+      <TopPage setPage={setPage}/>
+      {/* <TopAppBar searchCar={searchCar}></TopAppBar> */}
+      <Chip sx={{margin: '5px 0px 5px 5px'}} color="secondary" label="Filters" onClick={toggleDrawer}/>
       <Drawer open={drawerState} onClose={toggleDrawer}>
         <DrawerList filters={filters} />
       </Drawer>

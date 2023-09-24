@@ -8,7 +8,7 @@ import InputBase from '@mui/material/InputBase';
 const TopAppBar = ({searchCar}) => {
     return (
         <Box sx={{ flexGrow: 1}}>
-            <AppBar position="sticky">
+            <AppBar position="sticky" color="primary" sx={{minHeight: '24px'}}>
                 <div style={{ display: "flex", alignItems: "center"}} >
                     <InputBase placeholder="Search..." 
                     sx={{ input: { color : "white" }, placeholder: { padding: 0 }}}

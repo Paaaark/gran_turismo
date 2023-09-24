@@ -25,6 +25,7 @@ export default function App() {
   const [drawerState, setDrawerState] = useState(false);
   const [filters, setFilters] = useState(null);
   const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
 
   useEffect(() => {
     startData();
@@ -40,12 +41,12 @@ export default function App() {
 
   useEffect(() => {
     console.log("App.js ", page);
-    const start = (page - 1) * 10;
+    const start = (page - 1) * perPage;
     console.log(cars);
     if (cars != null) {
-      setFilteredCars(cars.slice(start, start + 10))
+      setFilteredCars(cars.slice(start, start + perPage))
     }
-  }, [page]);
+  }, [page, perPage]);
 
   async function startData() {
     const myClient = await getClient();
@@ -66,7 +67,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={myTheme}>
-      <TopPage setPage={setPage} theme={myTheme}/>
+      <TopPage setPage={setPage} setPerPage={setPerPage} theme={myTheme}/>
       {/* <TopAppBar searchCar={searchCar}></TopAppBar> */}
       <Chip sx={{margin: '5px 0px 5px 5px'}} color="secondary" label="Filters" onClick={toggleDrawer}/>
       <Drawer open={drawerState} onClose={toggleDrawer}>

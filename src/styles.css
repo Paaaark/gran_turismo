@@ -21,3 +21,12 @@ html {
   margin: 15px;
   padding: 15px;
 }
+
+.MuiOutlinedInput-notchedOutline {
+  border-width: 1px !important;
+  border-color: white !important;
+}
+
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+}

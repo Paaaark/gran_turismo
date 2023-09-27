@@ -2,5 +2,9 @@ export default {
     "REGION": "us-east-1",
     "GUEST_IDENTITY_ID": "us-east-1:8b3b024c-b243-4706-ac10-37a3c5a6c071",
     "REGISTERED_USER_ID": "us-east-1_mPPYvcqC9",
-    "APP_ID": "arn:aws:cognito-idp:us-east-1:621435378164:userpool/us-east-1_mPPYvcqC9"
+    "APP_ID": "arn:aws:cognito-idp:us-east-1:621435378164:userpool/us-east-1_mPPYvcqC9",
+    "ACCESS_KEY_ID": "ASIAZBMDPLH2OLFMSOCE",
+    "SECRET_ACCESS_KEY": "VMNAW4jC9Mi573NbfKs84j6TH4B9dvveNodLItE6",
+    "SESSION_TOKEN": "IQoJb3JpZ2luX2VjEH4aCXVzLWVhc3QtMSJHMEUCIQCnopR5KWRDG+XKcBZwDv3pndp4vwHaXCUaiumb5Sag5wIgFJU4IwDoQhj71YsQqDYZy2hi1tSZJlZsJK5kYtZtGJQq6wIIdhAAGgw2MjE0MzUzNzgxNjQiDA7g5oUlUrXgcBQIfirIAnng7RwKDEpak4y1/Bwfnpc1GDtXiUvv6sJVfl4EckUFkYQP0TRiOZGzMf9BF4vddteV2bPTJYLfrapDDYYR2auFLtq2KCHNCD+mHczeAZpJdwXGD1hvaPVQsy6SyKpxs7zqTuOnejeWmb4woC1MzwjxyNvk1mGVC4hRuAdzoSJo8Jt9mTY1WNbX4EzQdoaR+xYdl/qee3qsgonccfHjSTHyfW0GO2RzvLqx/mo9S4+caARenqAGE9mcckBq6SjNtBOKLqpr1IcJERmD3/4Qo6JghrL54X2q1Iq+HFOOl9Nip5HCpTPr68EHrWqZo/5ELSELHBBW1Y/Rd5i1N6E37TKGw6kubbrtAYfQR4uEYtjGYn94VedP/MacXHy1XJ27Lt/6pmzaVAmBvoqDn/DKOjtLY4QxFvc29hxFnuk2YvXZqMsyERagHxkw8a/LqAY6pwEAXwHivOdIggE1yj0YVD+G73zIM8B0PA7/haw7Ii+etW6f32v0S57YOanmZH4ZgH0bM/eHu3MiwtdCpZDgcle5YKzpKvISpOskioFXvWZSpjOyESbS5LbuZ+ub9RV+KzMvqA5ACHWC+yDXaeAsvI/0rpD1T98gX8/3I/PxYf+Gq/KvcJFxPqMNNmk5utrHg1L9xvOxx1QsZ0aNfY+Y6tyHHEYq9sTfoQ==",
+    "S3_BUCKET_NAME": "gt-project"
 }

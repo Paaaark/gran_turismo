@@ -9,7 +9,9 @@
   "main": "src/index.js",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.410.0",
+    "@aws-sdk/client-s3": "^3.418.0",
     "@aws-sdk/credential-providers": "^3.414.0",
+    "@aws-sdk/s3-request-presigner": "^3.420.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.7",

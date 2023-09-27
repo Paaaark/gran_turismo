@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Chip from '@mui/material/Chip';
 import Drawer from '@mui/material/Drawer';
 
-import { getClient, fetchData, fetchFilter } from './AWS';
+import { getClient, fetchImages, fetchData, fetchFilter } from './AWS';
 import myTheme from "./myTheme";
 import {findSubtotals} from './backend';
 import './styles.css';
@@ -29,6 +29,7 @@ export default function App() {
 
   useEffect(() => {
     startData();
+    fetchImages();
   }, []);
 
   useEffect(() => {

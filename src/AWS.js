@@ -1,6 +1,8 @@
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
+import { S3Client, ListObjectsCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 import awsExports from './aws-exports';
 import {fromCognitoIdentityPool} from '@aws-sdk/credential-providers';
+import {getSignedUrl} from '@aws-sdk/s3-request-presigner';
 
 export async function getClient() {
     const client = new DynamoDBClient({
@@ -11,6 +13,34 @@ export async function getClient() {
         })
     });
     return client;
+}
+
+export async function fetchImages() {
+    const client = new S3Client({
+        region: 'us-east-1',
+        credentials: fromCognitoIdentityPool({
+            clientConfig: {region: awsExports.REGION},
+            identityPoolId: awsExports.GUEST_IDENTITY_ID,
+        })
+    });
+    const input = {Bucket: "gt-project"};
+    const listCommand = new ListObjectsCommand(input);
+    const listResponse = await client.send(listCommand);
+    const fileNames = listResponse.Contents;
+    console.log("fileNames: ", fileNames);
+
+    const imgUrls = {};
+    for (let i = 0; i < fileNames.length; i++) {
+        const fileName = fileNames[i]['Key'];
+        const getCommand = new GetObjectCommand({
+            Bucket: awsExports.S3_BUCKET_NAME,
+            Key: fileName
+        });
+        const url = await getSignedUrl(client, getCommand, { expiresIn: 3600 });
+        imgUrls[fileName] = url;
+    }
+
+    return imgUrls;
 }
 
 export async function fetchData(client, limit) {

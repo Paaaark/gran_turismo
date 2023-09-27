@@ -9,15 +9,17 @@ import Divider from '@mui/material/Divider';
 import styles from './comp_styles.css';
 import { createTheme } from '@mui/material/styles';
 
-const CarCard = ( param ) => {
-    const [car, setCar] = useState(param.car);
+const CarCard = ( {car, flagImg, makeImg} ) => {
+    // const [car, setCar] = useState(car);
+
+    console.log("I got ", flagImg, " for ", car.name);
 
     return (
         <Card sx={{ width: "100%", height: "100%" }} style={{backgroundColor: '#141416'}}>
             <CardContent>
                 <Grid container direction='row' justifyContent='space-between' alignItems='center'>
                     <Grid item xs>
-                        <img width="10%" height="10%" src="https://i.ibb.co/b1bv9zk/alfa-romeo.jpg" />
+                        <img width="10%" height="10%" src={makeImg} />
                     </Grid>
                     <Grid item xs>
                         <div className="rounded_rectangle" sx={{ align: "justify"}}>
@@ -38,7 +40,7 @@ const CarCard = ( param ) => {
                 </Typography>
                 <Divider variant="fullWidth" style={{background: '#65656b'}}/>
                 <div className='card_bottom'>
-                    <img className="card_flag" width="10%" src="https://i.ibb.co/zS4MVFS/istockphoto-585788002-170667a.jpg" />
+                    <img className="card_flag" width="10%" src={flagImg} />
                 </div>
             </CardContent>
         </Card>

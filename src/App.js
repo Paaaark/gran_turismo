@@ -26,10 +26,11 @@ export default function App() {
   const [filters, setFilters] = useState(null);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
+  const [smallImgUrls, setSmallImgUrls] = useState(null);
 
   useEffect(() => {
     startData();
-    fetchImages();
+    fetchImageHelper();
   }, []);
 
   useEffect(() => {
@@ -53,6 +54,11 @@ export default function App() {
     setCars(temp_car);
     setFilteredCars(temp_car);
     setFilters(temp_filter);
+  }
+
+  async function fetchImageHelper() {
+    const tempHolder = await fetchImages();
+    setSmallImgUrls(tempHolder);
   }
 
   const searchCar = (newWord) => {
@@ -81,7 +87,7 @@ export default function App() {
         <DrawerList filters={filters} />
       </Drawer>
       <Grid>
-        <MainFragment cars={filteredCars} searchWord={searchWord}/>
+        <MainFragment cars={filteredCars} searchWord={searchWord} smallImgUrls={smallImgUrls} />
         {/* <CarCard car={{name: 'Alfa Romeo 4C Gr.4', brand: 'Alfa Romeo', pp: 610.55, country: 'Italy',
                       power: 295, weight: 2249, aspiration: 'TB', car_layout: 'MR'}}>
 

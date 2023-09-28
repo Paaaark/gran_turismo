@@ -21,8 +21,6 @@ const matchingMake = (car, smallImgUrls) => {
 }
 
 const MainFragment = ({ cars, smallImgUrls }) => {
-    console.log(smallImgUrls);
-
     return (
         <Grid container spacing={1}>
             {cars != null ? cars.map((car) => (

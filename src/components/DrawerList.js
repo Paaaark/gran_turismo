@@ -9,18 +9,33 @@ import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-const DrawerList = ({filters}) => {
-
+const DrawerList = ({filters, checkedFilters, onCheckFilter}) => {
+    const [checkedFiltersState, setCheckedFiltersState] = useState(checkedFilters);
     const getObjectKeys = (target) => {
-        console.log("Received target: ", target);
         let array = Object.keys(target);
         array = array.sort((a, b) => parseInt(target[b]['N']) - parseInt(target[a]['N']));
-        console.log("sorted array: ", array);
         return array;
     }
 
-    console.log("Received filter: ", filters);
-    console.log("Updated 2");
+    const handleChange = (event) => {
+        onCheckFilter(event.target.name, event.target.checked);
+        setCheckedFiltersState({
+            ...checkedFiltersState,
+            [event.target.name]: event.target.checked
+        });
+        console.log(checkedFilters[event.target.name]);
+    }
+
+    const abrvToFull = {
+        'aspi': 'Aspiration',
+        'car_tags': 'Car Tag',
+        'cty': 'Class',
+        'tr': 'Setup',
+        'car_sources': 'Car Source',
+        'make': 'Make',
+        'country': 'Country'
+    };
+
     return (
         <Box sx={{width: 250}} role="presentation">
             <List>
@@ -28,7 +43,7 @@ const DrawerList = ({filters}) => {
                     <div key={filter.property}>
                         <ListItem key={"title"} disablePadding>
                             <ListItemButton>
-                                <ListItemText primary={filter.property} />
+                                <ListItemText primary={abrvToFull[filter.property]} />
                             </ListItemButton>
                         </ListItem>
                         <ListItem key={"count"}>
@@ -37,8 +52,12 @@ const DrawerList = ({filters}) => {
                                     getObjectKeys(filter.count).map((key) => (
                                         <FormControlLabel 
                                         key={key}
-                                        control={<Checkbox />}
-                                        label={key + " (" + filter.count[key]['N'] + ")"} />
+                                        control={
+                                            <Checkbox onChange={handleChange}
+                                              checked={checkedFiltersState[filter.property + ':' + key]}
+                                              name={filter.property + ':' + key}/>
+                                        }
+                                        label={key + " (" + filter.count[key]['N'] + ")"}/>
                                     ))
                                 }
                             </FormGroup>

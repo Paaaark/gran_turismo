@@ -27,6 +27,7 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [smallImgUrls, setSmallImgUrls] = useState(null);
+  const [checkedFilters, setCheckedFilters] = useState(null);
 
   useEffect(() => {
     startData();
@@ -46,6 +47,19 @@ export default function App() {
       setFilteredCars(sliceData(cars));
     }
   }, [page, perPage, cars]);
+
+  useEffect(() => {
+    if (filters != null) {
+      let tempDict = {};
+      for (let i = 0; i < filters.length; i++) {
+        Object.keys(filters[i]['count']).forEach((key) => (
+          tempDict[filters[i]['property'] + ':' + key] = false
+        ))
+      }
+      setCheckedFilters(tempDict);
+      console.log(tempDict);
+    }
+  }, [filters])
 
   async function startData() {
     const myClient = await getClient();
@@ -77,6 +91,17 @@ export default function App() {
     setDrawerState(!drawerState);
   }
 
+  const onCheckFilter = (targetKey, status) => {
+    if (filters == null) return;
+    setCheckedFilters({
+      ...checkedFilters,
+      [targetKey]: status
+    });
+    console.log(targetKey, status);
+    console.log("Actual: ", checkedFilters);
+    console.log("Suppsoed: ", {...checkedFilters, [targetKey]: status});
+  }
+
   return (
     <ThemeProvider theme={myTheme}>
       <TopPage setPage={setPage} setPerPage={setPerPage} theme={myTheme} 
@@ -84,7 +109,7 @@ export default function App() {
       {/* <TopAppBar searchCar={searchCar}></TopAppBar> */}
       <Chip sx={{margin: '5px 0px 5px 5px'}} color="secondary" label="Filters" onClick={toggleDrawer}/>
       <Drawer open={drawerState} onClose={toggleDrawer}>
-        <DrawerList filters={filters} />
+        <DrawerList filters={filters} checkedFilters={checkedFilters} onCheckFilter={onCheckFilter}/>
       </Drawer>
       <Grid>
         <MainFragment cars={filteredCars} searchWord={searchWord} smallImgUrls={smallImgUrls} />

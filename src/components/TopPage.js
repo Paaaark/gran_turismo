@@ -12,7 +12,6 @@ import '../styles.css';
 const TopPage = ({setPage, theme, setPerPage, total}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [curPerPage, setCurPerPage] = useState(10);
-    console.log("Version 4");
 
     const handleChange = (event, value) => {
         setPage(value);

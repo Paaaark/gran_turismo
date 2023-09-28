@@ -62,6 +62,40 @@ export default function App() {
     }
   }, [filters])
 
+  useEffect(() => {
+    if (checkedFilters != null) {
+      // Check if any filter is activated
+      let conditions = {};
+      let flag = false;
+      Object.keys(checkedFilters).forEach((key) => {
+        flag = flag || checkedFilters[key];
+        if (checkedFilters[key] === true) {
+          const keyValue = key.split(':');
+          if (conditions[keyValue[0]] == null) {
+            conditions[keyValue[0]] = [];
+            conditions[keyValue[0]].push(keyValue[1]);
+          } else {
+            conditions[keyValue[0]].push(keyValue[1]);
+          }
+        }
+      })
+
+      // If some filters are activated, filter the cars
+      console.log("Selected condtions: ", conditions);
+      if (flag) {
+        console.log("Should be filtered")
+        setFilteredCars(cars.filter((car) => {
+          let meetsConditions = true;
+          Object.keys(conditions).forEach((key) => {
+            meetsConditions = conditions[key].includes(car[key]) && meetsConditions;
+          });
+          if (meetsConditions) console.log("This car is included: ", meetsConditions);
+          return meetsConditions;
+        }))
+      }
+    }
+  }, [checkedFilters]);
+
   async function startData() {
     const myClient = await getClient();
     const temp_car = await fetchData(myClient, "100");

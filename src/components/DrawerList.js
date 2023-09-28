@@ -10,6 +10,15 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 const DrawerList = ({filters}) => {
+
+    const getObjectKeys = (target) => {
+        console.log("Received target: ", target);
+        let array = Object.keys(target);
+        array = array.sort((a, b) => parseInt(target[b]['N']) - parseInt(target[a]['N']));
+        console.log("sorted array: ", array);
+        return array;
+    }
+
     console.log("Received filter: ", filters);
     console.log("Updated 2");
     return (
@@ -25,7 +34,7 @@ const DrawerList = ({filters}) => {
                         <ListItem key={"count"}>
                             <FormGroup>
                                 {
-                                    Object.keys(filter.count).map((key) => (
+                                    getObjectKeys(filter.count).map((key) => (
                                         <FormControlLabel 
                                         key={key}
                                         control={<Checkbox />}

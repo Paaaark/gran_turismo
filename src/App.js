@@ -17,6 +17,7 @@ import TopAppBar from './components/TopAppBar';
 import MainFragment from './components/MainFragment';
 import DrawerList from './components/DrawerList';
 import TopPage from './components/TopPage';
+import FilterChips from './components/FilterChips';
 
 export default function App() {
   const [cars, setCars] = useState(null);
@@ -97,9 +98,14 @@ export default function App() {
       ...checkedFilters,
       [targetKey]: status
     });
-    console.log(targetKey, status);
-    console.log("Actual: ", checkedFilters);
-    console.log("Suppsoed: ", {...checkedFilters, [targetKey]: status});
+  }
+
+  const handleChipDelete = (targetKey) => {
+    console.log("Deleted: ", targetKey);
+    setCheckedFilters({
+      ...checkedFilters,
+      [targetKey]: false
+    });
   }
 
   return (
@@ -108,6 +114,7 @@ export default function App() {
         total={cars != null ? cars.length : 100}/>
       {/* <TopAppBar searchCar={searchCar}></TopAppBar> */}
       <Chip sx={{margin: '5px 0px 5px 5px'}} color="secondary" label="Filters" onClick={toggleDrawer}/>
+      <FilterChips checkedFilters={checkedFilters} handleDelete={handleChipDelete} />
       <Drawer open={drawerState} onClose={toggleDrawer}>
         <DrawerList filters={filters} checkedFilters={checkedFilters} onCheckFilter={onCheckFilter}/>
       </Drawer>

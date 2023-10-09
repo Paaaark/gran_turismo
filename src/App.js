@@ -1,23 +1,23 @@
 import "./styles.css";
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 // Import mui components
-import { ThemeProvider } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Chip from '@mui/material/Chip';
-import Drawer from '@mui/material/Drawer';
+import { ThemeProvider } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
+import Chip from "@mui/material/Chip";
+import Drawer from "@mui/material/Drawer";
 
-import { getClient, fetchImages, fetchData, fetchFilter } from './AWS';
+import { getClient, fetchImages, fetchData, fetchFilter } from "./AWS";
 import myTheme from "./myTheme";
-import {findSubtotals} from './backend';
-import './styles.css';
+import { findSubtotals } from "./backend";
+import "./styles.css";
 
 // Import custom components
-import TopAppBar from './components/TopAppBar';
-import MainFragment from './components/MainFragment';
-import DrawerList from './components/DrawerList';
-import TopPage from './components/TopPage';
-import FilterChips from './components/FilterChips';
+import TopAppBar from "./components/TopAppBar";
+import MainFragment from "./components/MainFragment";
+import DrawerList from "./components/DrawerList";
+import TopPage from "./components/TopPage";
+import FilterChips from "./components/FilterChips";
 
 export default function App() {
   const [cars, setCars] = useState(null);
@@ -38,8 +38,10 @@ export default function App() {
   useEffect(() => {
     if (filteredCars != null) {
       setFilteredCars(
-        cars.filter((car) => car.name.toLowerCase().includes(searchWord.toLowerCase()))
-      )
+        cars.filter((car) =>
+          car.name.toLowerCase().includes(searchWord.toLowerCase()),
+        ),
+      );
     }
   }, [searchWord]);
 
@@ -50,19 +52,20 @@ export default function App() {
   }, [page, perPage, cars]);
 
   useEffect(() => {
+    console.log("Filters updated");
     if (filters != null) {
       let tempDict = {};
       for (let i = 0; i < filters.length; i++) {
-        Object.keys(filters[i]['count']).forEach((key) => (
-          tempDict[filters[i]['property'] + ':' + key] = false
-        ))
+        Object.keys(filters[i]["count"]).forEach(
+          (key) => (tempDict[filters[i]["property"] + ":" + key] = false),
+        );
       }
       setCheckedFilters(tempDict);
-      console.log(tempDict);
     }
-  }, [filters])
+  }, [filters]);
 
   useEffect(() => {
+    console.log("CheckedFilters updated");
     if (checkedFilters != null) {
       // Check if any filter is activated
       let conditions = {};
@@ -70,7 +73,7 @@ export default function App() {
       Object.keys(checkedFilters).forEach((key) => {
         flag = flag || checkedFilters[key];
         if (checkedFilters[key] === true) {
-          const keyValue = key.split(':');
+          const keyValue = key.split(":");
           if (conditions[keyValue[0]] == null) {
             conditions[keyValue[0]] = [];
             conditions[keyValue[0]].push(keyValue[1]);
@@ -78,20 +81,20 @@ export default function App() {
             conditions[keyValue[0]].push(keyValue[1]);
           }
         }
-      })
+      });
 
       // If some filters are activated, filter the cars
-      console.log("Selected condtions: ", conditions);
       if (flag) {
-        console.log("Should be filtered")
-        setFilteredCars(cars.filter((car) => {
-          let meetsConditions = true;
-          Object.keys(conditions).forEach((key) => {
-            meetsConditions = conditions[key].includes(car[key]) && meetsConditions;
-          });
-          if (meetsConditions) console.log("This car is included: ", meetsConditions);
-          return meetsConditions;
-        }))
+        setFilteredCars(
+          cars.filter((car) => {
+            let meetsConditions = true;
+            Object.keys(conditions).forEach((key) => {
+              meetsConditions =
+                conditions[key].includes(car[key]) && meetsConditions;
+            });
+            return meetsConditions;
+          }),
+        );
       }
     }
   }, [checkedFilters]);
@@ -112,7 +115,7 @@ export default function App() {
 
   const searchCar = (newWord) => {
     setSearchWord(newWord);
-  }
+  };
 
   const sliceData = (data) => {
     if (data != null) {
@@ -120,40 +123,60 @@ export default function App() {
       return data.slice(start, start + perPage);
     }
     return null;
-  }
+  };
 
   const toggleDrawer = () => {
     setDrawerState(!drawerState);
-  }
+  };
 
   const onCheckFilter = (targetKey, status) => {
+    console.log("App.js onCheckFilter fired");
     if (filters == null) return;
     setCheckedFilters({
       ...checkedFilters,
-      [targetKey]: status
+      [targetKey]: status,
     });
-  }
+  };
 
   const handleChipDelete = (targetKey) => {
-    console.log("Deleted: ", targetKey);
     setCheckedFilters({
       ...checkedFilters,
-      [targetKey]: false
+      [targetKey]: false,
     });
-  }
+  };
 
   return (
     <ThemeProvider theme={myTheme}>
-      <TopPage setPage={setPage} setPerPage={setPerPage} theme={myTheme} 
-        total={cars != null ? cars.length : 100}/>
+      <TopPage
+        setPage={setPage}
+        setPerPage={setPerPage}
+        theme={myTheme}
+        total={cars != null ? cars.length : 100}
+      />
       {/* <TopAppBar searchCar={searchCar}></TopAppBar> */}
-      <Chip sx={{margin: '5px 0px 5px 5px'}} color="secondary" label="Filters" onClick={toggleDrawer}/>
-      <FilterChips checkedFilters={checkedFilters} handleDelete={handleChipDelete} />
+      <Chip
+        sx={{ margin: "5px 0px 5px 5px" }}
+        color="secondary"
+        label="Filters"
+        onClick={toggleDrawer}
+      />
+      <FilterChips
+        checkedFilters={checkedFilters}
+        handleDelete={handleChipDelete}
+      />
       <Drawer open={drawerState} onClose={toggleDrawer}>
-        <DrawerList filters={filters} checkedFilters={checkedFilters} onCheckFilter={onCheckFilter}/>
+        <DrawerList
+          filters={filters}
+          checkedFilters={checkedFilters}
+          onCheckFilter={onCheckFilter}
+        />
       </Drawer>
       <Grid>
-        <MainFragment cars={filteredCars} searchWord={searchWord} smallImgUrls={smallImgUrls} />
+        <MainFragment
+          cars={filteredCars}
+          searchWord={searchWord}
+          smallImgUrls={smallImgUrls}
+        />
         {/* <CarCard car={{name: 'Alfa Romeo 4C Gr.4', brand: 'Alfa Romeo', pp: 610.55, country: 'Italy',
                       power: 295, weight: 2249, aspiration: 'TB', car_layout: 'MR'}}>
 

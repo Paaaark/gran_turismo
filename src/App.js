@@ -9,7 +9,7 @@ import Drawer from "@mui/material/Drawer";
 
 import { getClient, fetchImages, fetchData, fetchFilter } from "./AWS";
 import myTheme from "./myTheme";
-import { findSubtotals } from "./backend";
+import { findSubtotals, sliceData } from "./backend";
 import "./styles.css";
 
 // Import custom components
@@ -45,13 +45,13 @@ export default function App() {
     }
   }, [searchWord]);
 
-  useEffect(() => {
-    if (filteredCars != null) {
-      setFilteredCars(sliceData(filteredCars));
-    } else if (cars != null) {
-      setFilteredCars(sliceData(cars));
-    }
-  }, [page, perPage, cars]);
+  // useEffect(() => {
+  //   if (filteredCars != null) {
+  //     setFilteredCars(sliceData(filteredCars));
+  //   } else if (cars != null) {
+  //     setFilteredCars(sliceData(cars));
+  //   }
+  // }, [page, perPage, cars]);
 
   useEffect(() => {
     if (filters != null) {
@@ -89,25 +89,23 @@ export default function App() {
       if (flag) {
         console.log("Should be filtered");
         setFilteredCars(
-          sliceData(
-            cars.filter((car) => {
-              let meetsConditions = true;
-              Object.keys(conditions).forEach((key) => {
-                if (["car_tags", "car_sources"].includes(key)) {
-                  const intersection = conditions[key].filter((item) =>
-                    car[key].includes(item),
-                  );
-                  meetsConditions = intersection.length > 0 && meetsConditions;
-                } else {
-                  meetsConditions =
-                    conditions[key].includes(car[key]) && meetsConditions;
-                }
-              });
-              if (meetsConditions)
-                console.log("This car is included: ", meetsConditions);
-              return meetsConditions;
-            }),
-          ),
+          cars.filter((car) => {
+            let meetsConditions = true;
+            Object.keys(conditions).forEach((key) => {
+              if (["car_tags", "car_sources"].includes(key)) {
+                const intersection = conditions[key].filter((item) =>
+                  car[key].includes(item),
+                );
+                meetsConditions = intersection.length > 0 && meetsConditions;
+              } else {
+                meetsConditions =
+                  conditions[key].includes(car[key]) && meetsConditions;
+              }
+            });
+            if (meetsConditions)
+              console.log("This car is included: ", meetsConditions);
+            return meetsConditions;
+          }),
         );
       }
     }
@@ -129,14 +127,6 @@ export default function App() {
 
   const searchCar = (newWord) => {
     setSearchWord(newWord);
-  };
-
-  const sliceData = (data) => {
-    if (data != null) {
-      const start = (page - 1) * perPage;
-      return data.slice(start, start + perPage);
-    }
-    return null;
   };
 
   const toggleDrawer = () => {
@@ -187,9 +177,11 @@ export default function App() {
       </Drawer>
       <Grid>
         <MainFragment
-          cars={filteredCars}
+          carsParam={filteredCars}
           searchWord={searchWord}
           smallImgUrls={smallImgUrls}
+          page={page}
+          perPage={perPage}
         />
         {/* <CarCard car={{name: 'Alfa Romeo 4C Gr.4', brand: 'Alfa Romeo', pp: 610.55, country: 'Italy',
                       power: 295, weight: 2249, aspiration: 'TB', car_layout: 'MR'}}>

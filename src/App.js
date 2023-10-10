@@ -155,7 +155,7 @@ export default function App() {
         setPage={setPage}
         setPerPage={setPerPage}
         theme={myTheme}
-        total={cars != null ? cars.length : 100}
+        total={filteredCars != null ? filteredCars.length : 100}
       />
       {/* <TopAppBar searchCar={searchCar}></TopAppBar> */}
       <Chip
@@ -173,6 +173,11 @@ export default function App() {
           filters={filters}
           checkedFilters={checkedFilters}
           onCheckFilter={onCheckFilter}
+          openParam={
+            filters != null
+              ? filters.map((item) => ({ [item.property]: false }))
+              : null
+          }
         />
       </Drawer>
       <Grid>

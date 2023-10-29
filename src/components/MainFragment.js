@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import React from "react";
 import CarCard from "./CarCard";
 import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 import { sliceData } from "../backend";
 
@@ -45,7 +47,17 @@ const MainFragment = ({ carsParam, smallImgUrls, page, perPage }) => {
           </Grid>
         ))
       ) : (
-        <div />
+        <Grid
+          item
+          xs={12}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress />
+        </Grid>
       )}
     </Grid>
   );
